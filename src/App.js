@@ -23,6 +23,80 @@ function App() {
     return () => clearInterval(slider);
   }, [index]);
 
+  // alternative Type - 1  for the above code
+
+  /*   
+  
+   const nextSlide = () => {
+     setIndex((oldIndex) => {
+       const result = (oldIndex + 1) % people.length;
+       return result;
+     });
+   };
+
+   const prevSlide = () => {
+     setIndex((oldIndex) => {
+       const result = (oldIndex - 1 + people.length) % people.length;
+       return result;
+     });
+   };
+
+   useEffect(() => {
+     let slider = setInterval(() => {
+       setIndex((oldIndex) => {
+         const result = (oldIndex + 1) % people.length;
+         return result;
+       });
+     }, 5000);
+     return () => {
+       clearInterval(slider);
+     };
+   }, [index]);
+   
+  */
+
+  // alternative Type - 2  for the above code
+
+  /*   
+  
+  const nextSlide = () => {
+    setIndex((oldIndex) => {
+      let index = oldIndex + 1
+      if (index > people.length - 1) {
+        index = 0
+      }
+      return index
+    })
+  }
+  const prevSlide = () => {
+    setIndex((oldIndex) => {
+      let index = oldIndex - 1
+      if (index < 0) {
+        index = people.length - 1
+      }
+      return index
+    })
+  }
+
+  useEffect(() => {
+    let slider = setInterval(() => {
+      setIndex((oldIndex) => {
+        let index = oldIndex + 1
+        if (index > people.length - 1) {
+          index = 0
+        }
+        return index
+      })
+    }, 5000)
+    return () => {
+      clearInterval(slider)
+    }
+  }, [index]) 
+  
+  */
+
+  // these function return the given data from the user input
+  
   return (
     <section className='section'>
       <div className='title'>
@@ -33,7 +107,7 @@ function App() {
       <div className='section-center'>
         {people.map((person, personIndex) => {
           const { id, image, name, title, quote } = person;
-          // more stuff coming up
+
           let position = 'nextSlide';
           if (personIndex === index) {
             position = 'activeSlide';
